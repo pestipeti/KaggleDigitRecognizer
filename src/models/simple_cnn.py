@@ -31,7 +31,7 @@ class SimpleCnnModel(AbstractModel):
         super(SimpleCnnModel, self).__init__()
 
     def get_id(self):
-        return 'cnn_5'
+        return 'cnn_6'
 
     def create_model(self, input_shape):
         km = Sequential()
@@ -45,6 +45,9 @@ class SimpleCnnModel(AbstractModel):
         km.add(Dropout(0.25))
 
         km.add(Flatten())
+        km.add(Dense(units=128, activation='relu'))
+        km.add(Dropout(0.25))
+
         km.add(Dense(units=64, activation='relu'))
         km.add(Dropout(0.25))
 
