@@ -31,7 +31,7 @@ import matplotlib.pyplot as plt
 from keras.utils.np_utils import to_categorical
 from sklearn.model_selection import train_test_split
 
-from models.cnn_1 import Cnn1Model
+from models.simple_cnn import SimpleCnnModel
 
 
 # ================================================
@@ -80,7 +80,7 @@ features_train, features_validation, labels_train, labels_validation = train_tes
 # ================================================
 # Create model
 # ================================================
-model = Cnn1Model()
+model = SimpleCnnModel()
 model.set_verbose(VERBOSE)
 model.set_epochs(EPOCHS)
 

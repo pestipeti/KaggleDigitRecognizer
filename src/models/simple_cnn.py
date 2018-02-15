@@ -25,10 +25,10 @@ from keras.layers import Convolution2D, MaxPooling2D, Flatten, Dense, Dropout
 from .abstract_model import AbstractModel
 
 
-class Cnn1Model(AbstractModel):
+class SimpleCnnModel(AbstractModel):
 
     def __init__(self):
-        super(Cnn1Model, self).__init__()
+        super(SimpleCnnModel, self).__init__()
 
     def get_id(self):
         return 'cnn_1'
