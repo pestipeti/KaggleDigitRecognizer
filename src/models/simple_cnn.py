@@ -31,12 +31,12 @@ class SimpleCnnModel(AbstractModel):
         super(SimpleCnnModel, self).__init__()
 
     def get_id(self):
-        return 'cnn_2'
+        return 'cnn_3'
 
     def create_model(self, input_shape):
         km = Sequential()
 
-        km.add(Convolution2D(64, (3, 3), input_shape=input_shape, activation='relu'))
+        km.add(Convolution2D(32, (5, 5), input_shape=input_shape, activation='relu'))
         km.add(MaxPooling2D(pool_size=(2, 2)))
         km.add(Dropout(0.25))
 
