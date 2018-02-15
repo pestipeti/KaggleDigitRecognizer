@@ -21,8 +21,11 @@
 # SOFTWARE.
 
 import os
+import time
 import pandas as pd
 import numpy as np
+# import matplotlib
+# matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from keras.utils.np_utils import to_categorical
@@ -45,6 +48,7 @@ FOLDER_ROOT = './../'
 FOLDER_INPUT = FOLDER_ROOT + '/input'
 FOLDER_OUTPUT = FOLDER_ROOT + '/output'
 
+start = time.time()
 # ================================================
 # Data preprocessing
 # ================================================
@@ -111,3 +115,5 @@ plt.ylabel('Accuracy')
 plt.savefig(FOLDER_OUTPUT + '/' + model.get_run_id() + '/accuracy.png')
 
 np.savetxt(FOLDER_OUTPUT + '/' + model.get_run_id() + '/accuracy.dat', np.array(history.acc))
+
+print('Total running time: ', time.time()-start)
