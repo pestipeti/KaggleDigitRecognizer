@@ -22,6 +22,7 @@
 
 from keras.models import Sequential
 from keras.layers import Convolution2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.preprocessing.image import ImageDataGenerator
 from .abstract_model import AbstractModel
 
 
@@ -31,7 +32,7 @@ class SimpleCnnModel(AbstractModel):
         super(SimpleCnnModel, self).__init__()
 
     def get_id(self):
-        return 'cnn_7'
+        return 'data_aug_1'
 
     def create_model(self, input_shape):
         km = Sequential()
@@ -57,3 +58,19 @@ class SimpleCnnModel(AbstractModel):
         km.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
         self._set_model(km)
+
+    def fit(self, features_train, labels_train, features_validation, labels_validation):
+        generated_data = ImageDataGenerator(rotation_range=10,
+                                            zoom_range=0.1,
+                                            shear_range=0.1)
+
+        generated_data.fit(features_train)
+
+        model = self.get_model()
+        model.fit_generator(generated_data.flow(features_train, labels_train,
+                                                batch_size=self._batch_size),
+                            epochs=self._epochs,
+                            callbacks=[self._history],
+                            validation_data=(features_validation, labels_validation),
+                            steps_per_epoch=features_train.shape[0] / self._batch_size,
+                            verbose=self._verbose)
