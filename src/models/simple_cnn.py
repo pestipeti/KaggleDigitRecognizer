@@ -34,7 +34,7 @@ class SimpleCnnModel(AbstractModel):
         super(SimpleCnnModel, self).__init__()
 
     def get_id(self):
-        return 'lr_1'
+        return 'lr_2'
 
     def create_model(self, input_shape):
         km = Sequential()
@@ -62,14 +62,15 @@ class SimpleCnnModel(AbstractModel):
         self._set_model(km)
 
     def get_optimizer(self):
-        return Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0., amsgrad=True)
+        return Adam(lr=0.0005, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0., amsgrad=True)
 
     def get_learning_rate_optimizer_callback(self):
         return ReduceLROnPlateau(monitor='val_loss',
-                                 patience=3,
+                                 patience=4,
                                  verbose=self._verbose,
                                  factor=0.9,
-                                 min_lr=0.00001)
+                                 min_lr=0.0000075,
+                                 cooldown=2)
 
     def fit(self, features_train, labels_train, features_validation, labels_validation):
         generated_data = ImageDataGenerator(rotation_range=15,
