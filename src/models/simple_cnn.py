@@ -60,7 +60,7 @@ class SimpleCnnModel(AbstractModel):
         self._set_model(km)
 
     def fit(self, features_train, labels_train, features_validation, labels_validation):
-        generated_data = ImageDataGenerator(rotation_range=0.05,
+        generated_data = ImageDataGenerator(rotation_range=15,
                                             zoom_range=0.1,
                                             shear_range=0.1,
                                             height_shift_range=0.1,
