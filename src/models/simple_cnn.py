@@ -22,6 +22,8 @@
 
 from keras.models import Sequential
 from keras.layers import Convolution2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.optimizers import Adam
+from keras.callbacks import ReduceLROnPlateau
 from keras.preprocessing.image import ImageDataGenerator
 from .abstract_model import AbstractModel
 
@@ -32,7 +34,7 @@ class SimpleCnnModel(AbstractModel):
         super(SimpleCnnModel, self).__init__()
 
     def get_id(self):
-        return 'data_aug_3'
+        return 'lr_1'
 
     def create_model(self, input_shape):
         km = Sequential()
@@ -59,6 +61,16 @@ class SimpleCnnModel(AbstractModel):
 
         self._set_model(km)
 
+    def get_optimizer(self):
+        return Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0., amsgrad=True)
+
+    def get_learning_rate_optimizer_callback(self):
+        return ReduceLROnPlateau(monitor='val_loss',
+                                 patience=3,
+                                 verbose=self._verbose,
+                                 factor=0.9,
+                                 min_lr=0.00001)
+
     def fit(self, features_train, labels_train, features_validation, labels_validation):
         generated_data = ImageDataGenerator(rotation_range=15,
                                             zoom_range=0.1,
@@ -72,7 +84,7 @@ class SimpleCnnModel(AbstractModel):
         model.fit_generator(generated_data.flow(features_train, labels_train,
                                                 batch_size=self._batch_size),
                             epochs=self._epochs,
-                            callbacks=[self._history],
+                            callbacks=[self.get_learning_rate_optimizer_callback(), self._history],
                             validation_data=(features_validation, labels_validation),
                             steps_per_epoch=features_train.shape[0] / self._batch_size,
                             verbose=self._verbose)

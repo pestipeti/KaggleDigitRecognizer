@@ -66,6 +66,9 @@ class AbstractModel(ABC):
         model = self.get_model()
         return model.predict_classes(features_test)
 
+    def get_optimizer(self):
+        return 'adam'
+
     def get_model(self) -> Sequential:
         if self._model is None:
             raise RuntimeError('You have not created the model yet. Call the `create_model` '
