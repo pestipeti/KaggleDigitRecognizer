@@ -116,7 +116,9 @@ plt.savefig(FOLDER_OUTPUT + '/' + model.get_run_id() + '/accuracy.png')
 
 df = pd.DataFrame()
 df['acc'] = history.acc
+df['loss'] = history.loss
 df['val_acc'] = history.val_acc
-df.to_csv(FOLDER_OUTPUT + '/' + model.get_run_id() + '/accuracy.csv', header=True, index=False)
+df['val_loss'] = history.val_loss
+df.to_csv(FOLDER_OUTPUT + '/' + model.get_run_id() + '/history.csv', header=True, index=False)
 
 print('Total running time: ', time.time()-start)

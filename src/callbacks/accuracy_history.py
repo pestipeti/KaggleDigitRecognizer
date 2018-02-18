@@ -27,13 +27,19 @@ class AccuracyHistory(Callback):
 
     def __init__(self):
         self.acc = []
+        self.loss = []
         self.val_acc = []
+        self.val_loss = []
         super(AccuracyHistory, self).__init__()
 
     def on_train_begin(self, logs=None):
         self.acc = []
+        self.loss = []
         self.val_acc = []
+        self.val_loss = []
 
     def on_epoch_end(self, batch, logs=None):
         self.acc.append(logs.get('acc'))
+        self.loss.append(logs.get('loss'))
         self.val_acc.append(logs.get('val_acc'))
+        self.val_loss.append(logs.get('val_loss'))
