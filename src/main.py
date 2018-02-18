@@ -74,7 +74,7 @@ labels_train = to_categorical(labels_train, num_classes=10)
 
 # Splitting the training set to training and validation subset
 features_train, features_validation, labels_train, labels_validation = train_test_split(
-    features_train, labels_train, test_size=0.25, random_state=0)
+    features_train, labels_train, test_size=0.15, random_state=0)
 
 
 # ================================================
@@ -114,6 +114,9 @@ plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.savefig(FOLDER_OUTPUT + '/' + model.get_run_id() + '/accuracy.png')
 
-np.savetxt(FOLDER_OUTPUT + '/' + model.get_run_id() + '/accuracy.dat', np.array(history.acc))
+df = pd.DataFrame()
+df['acc'] = history.acc
+df['val_acc'] = history.val_acc
+df.to_csv(FOLDER_OUTPUT + '/' + model.get_run_id() + '/accuracy.csv', header=True, index=False)
 
 print('Total running time: ', time.time()-start)

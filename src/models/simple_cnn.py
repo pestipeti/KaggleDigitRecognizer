@@ -32,7 +32,7 @@ class SimpleCnnModel(AbstractModel):
         super(SimpleCnnModel, self).__init__()
 
     def get_id(self):
-        return 'data_aug_1'
+        return 'data_aug_2'
 
     def create_model(self, input_shape):
         km = Sequential()
@@ -62,7 +62,9 @@ class SimpleCnnModel(AbstractModel):
     def fit(self, features_train, labels_train, features_validation, labels_validation):
         generated_data = ImageDataGenerator(rotation_range=10,
                                             zoom_range=0.1,
-                                            shear_range=0.1)
+                                            shear_range=0.1,
+                                            height_shift_range=0.1,
+                                            width_shift_range=0.1)
 
         generated_data.fit(features_train)
 
