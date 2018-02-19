@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 from keras.models import Sequential
-from keras.layers import Convolution2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.layers import Convolution2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
 from keras.optimizers import Adam
 from keras.callbacks import ReduceLROnPlateau
 from keras.preprocessing.image import ImageDataGenerator
@@ -34,26 +34,33 @@ class SimpleCnnModel(AbstractModel):
         super(SimpleCnnModel, self).__init__()
 
     def get_id(self):
-        return 'lr_2'
+        return 'final_1'
 
     def create_model(self, input_shape):
         km = Sequential()
 
         km.add(Convolution2D(32, (5, 5), input_shape=input_shape, activation='relu'))
+        km.add(BatchNormalization())
         km.add(Convolution2D(32, (5, 5), input_shape=input_shape, activation='relu'))
         km.add(MaxPooling2D(pool_size=(2, 2)))
+        km.add(BatchNormalization())
         km.add(Dropout(0.25))
 
         km.add(Convolution2D(64, (3, 3), input_shape=input_shape, activation='relu'))
+        km.add(BatchNormalization())
         km.add(Convolution2D(64, (3, 3), input_shape=input_shape, activation='relu'))
         km.add(MaxPooling2D(pool_size=(2, 2)))
+        km.add(BatchNormalization())
         km.add(Dropout(0.25))
 
         km.add(Flatten())
+        km.add(BatchNormalization())
         km.add(Dense(units=128, activation='relu'))
+        km.add(BatchNormalization())
         km.add(Dropout(0.25))
 
         km.add(Dense(units=64, activation='relu'))
+        km.add(BatchNormalization())
         km.add(Dropout(0.25))
 
         km.add(Dense(units=10, activation='softmax'))
