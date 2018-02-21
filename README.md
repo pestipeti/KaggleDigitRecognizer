@@ -7,7 +7,7 @@ techniques emerge, MNIST remains a reliable resource for researchers and learner
 
 **Results**
 
-You can find more details about the results [here](https://www.kaggle.com/pestipeti/step-by-step-improving-cnn-0-9841-0-99/notebook).
+You can find more details about the results [here](https://www.kaggle.com/pestipeti/step-by-step-improving-cnn-0-98414-0-99714).
 
 *Do not forget to upvote if you like it. ;) Thanks.*
 
@@ -16,7 +16,7 @@ You can find more details about the results [here](https://www.kaggle.com/pestip
 
 **Links**:
 * [Digit Recognizer Competition](https://www.kaggle.com/c/digit-recognizer)
-* [Kaggle Kernel | Step-By-Step: Improving CNN (0.9841 -> 0.99+)](https://www.kaggle.com/pestipeti/step-by-step-improving-cnn-0-9841-0-99/notebook)
+* [Kaggle Kernel | Step-By-Step: Improving CNN (0.98414 -> 0.99714)](https://www.kaggle.com/pestipeti/step-by-step-improving-cnn-0-98414-0-99714)
 * [Yann LeCun's MINST database](http://yann.lecun.com/exdb/mnist/index.html)
 
 **Licence** :
